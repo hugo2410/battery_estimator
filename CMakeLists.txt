@@ -7,6 +7,6 @@ include_directories(Modules)
 add_subdirectory(Test)
 add_subdirectory(Modules)
 set(SOURCE_FILES main.cpp)
-add_executable(Project_Monte_carlo ${SOURCE_FILES})
+add_executable(Battery_Estimator ${SOURCE_FILES})
 
-target_link_libraries(Battery_Estimator Modules)
+target_link_libraries(Battery_Estimator ../Project_monte_carlo/Modules)
