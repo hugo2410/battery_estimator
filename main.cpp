@@ -44,7 +44,15 @@ int main(int argc, char *argv[]) {
     } catch(AbstractError& e) {
         cerr << "Exception thrown: " << e.what() << endl;
         return -1;
-    }
+    pBatteryEstimation = new NaiveBatteryEstimation;
 
+    if (pBatteryEstimation->computeRemainingBattery(initialBatteryLevel,
+                                                                    waypoints,
+                                                                    windData,
+                                                                    energyConsumption)){
+        cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
+    } else {
+        err<< " Caution: there is not enough battery to complete the flight plan"<<endl;
+    }
     return 0;
 }

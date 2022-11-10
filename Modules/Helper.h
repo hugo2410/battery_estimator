@@ -12,5 +12,6 @@ struct WindInfo {
 };
 
 static constexpr int                    initialBatteryLevel = 22;
-static constexpr int                    energyConsumption = 2.0;
+static constexpr int                    energyConsumption = 2;
 static constexpr int                    airSpeed = 30;
+static constexpr int                    batteryMargin = 2;
