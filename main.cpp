@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
     } else {
         cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
     }
+    delete pBatteryEstimation;
 
     return 0;
 }

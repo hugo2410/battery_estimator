@@ -27,6 +27,9 @@ that the wind along the journey will correspond to the wind at the closest measu
 
 ### How It Works
 
-To run the executable, the following information must be written to the terminal :
-
-'./battery_estimator  name_of_waypoint_file name_of_winddata_file' .
+To compile and run the executable, the following commands must be written in the terminal :
+```
+cmake .
+make 
+./Battery_Estimator
+``` 
