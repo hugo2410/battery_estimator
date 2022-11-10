@@ -16,14 +16,25 @@ This project aims to deliver a battery estimator module taking the following inp
 
 The module outputs a list with the battery estimate at each waypoint
 
-It was decided to implement 3 different logics, the first being the "naive" one which would mimic the current
-implementation which needs to be improved. Then I created two branches building up onto this skeleton and offers
-more realistic approaches. The aim was to show how I would develop new features. 
+I decided to implement 3 different logics, which would all use the same framework. The first being the "naive" one 
+which would mimic the current implementation which would be the baseline needing improvement. Then I created two 
+branches building up onto this skeleton and offers more realistic approaches. The aim was to show how I 
+would develop new features.
 
-The "naive" implementation ignores the wind and assumes a constant depletion of the battery across the journey.
+For all logic the program creates an abstract battery estimation object and then creates the desired 
+object before calling the computeBatteryEstimation function. However, each implementation solves the problem
+in a different manner.
+The 3 different implementations are explained below:
 
-The "simple" implementation which is developed on the branch "feature/simple_implementation", the assumption used is 
+* The "naive" implementation ignores the wind and assumes a constant depletion of the battery across the journey.
+
+* The "[simple](https://github.com/hugo2410/battery_estimator/pull/2)" implementation used the assumption  
 that the wind along the journey will correspond to the wind at the closest measured point.
+
+* The "[Advanced](https://github.com/hugo2410/battery_estimator/pull/1)" implementation computes the 
+decay of each measurement using the distance to the waypoint and the exponential function. The 
+weighted measurement is then compared to the head wind component to ensure that two measurements don't 
+end up creating a stronger wind then the measurements themselves.
 
 ### How It Works
 
@@ -32,4 +43,14 @@ To compile and run the executable, the following commands must be written in the
 cmake .
 make 
 ./Battery_Estimator
+``` 
+
+### Unit tests
+
+To compile and run the executable, the following commands must be written in the terminal :
+```
+cmake .
+make 
+cd Test
+./RunAllTest
 ``` 
