@@ -22,7 +22,6 @@ double NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
         aircraftPosition = waypoint;
         // Update the amount of battery left after having flown to the next waypoint
         initBattery -= (distance / airSpeed) * (energyConsumption / SECONDSPERHOUR);
-
     }
     return initBattery;
 }

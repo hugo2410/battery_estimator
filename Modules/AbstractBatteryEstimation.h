@@ -6,11 +6,10 @@
 #define BATTERY_ESTIMATOR_ABSTRACTBATTERYESTIMATION_H
 
 #include <vector>
-#include <math.h>
 #include <unordered_map>
 #include <boost/functional/hash.hpp>
 #include "Helper.h"
-#include "AbstractError.h"
+
 
 /**
  * \brief Abstract class for battery estimation
@@ -28,7 +27,9 @@ public:
     * @return Estimation of the remaining battery (Wh)
      */
     virtual double computeRemainingBattery(double initBattery,
-                                                        const std::vector<Coordinates> &WayPoints,                                                         boost::hash<Coordinates>> &WindData,
+                                                        const std::vector<Coordinates> &WayPoints,
+                                                        const  std::unordered_map<Coordinates, WindInfo,
+                                                                                    boost::hash<Coordinates>> &WindData,
                                                         double energyConsumption) = 0 ;
 };
 

@@ -47,8 +47,10 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    double batteryEstimate1 = initialBatteryLevel - (300.0/ static_cast<float>(airSpeed)) * (static_cast<float>(energyConsumption) / SECONDSPERHOUR);
-    double batteryEstimate2 = initialBatteryLevel - (3000.0/ static_cast<float>(airSpeed)) * (static_cast<float>(energyConsumption)  / SECONDSPERHOUR);
+    double batteryEstimate1 = initialBatteryLevel - (300.0/ static_cast<float>(airSpeed)) *
+                              (static_cast<float>(energyConsumption) / SECONDSPERHOUR);
+    double batteryEstimate2 = initialBatteryLevel - (3000.0/ static_cast<float>(airSpeed)) *
+                              (static_cast<float>(energyConsumption)  / SECONDSPERHOUR);
 
 };
 

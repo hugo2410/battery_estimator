@@ -4,22 +4,26 @@
 
 #include "gtest/gtest.h"
 #include "SimpleBatteryEstimation.h"
-#include "AbstractBatteryEstimation.h"
 #include <cmath>
-
-
-
-#define TEST_SIZE 100
-#define TEST_MEAN 4.
-#define TEST_VARIANCE 2.
-
 
 
 class SimpleEstimation : public ::testing::Test
 {
 protected:
     virtual void TearDown() {
+    }
 
+    virtual void SetUp() {
+
+            windData = {
+                {{1000.0, 0}, {100, 0}},
+                {{1000, 1000}, {100, 0}},
+        };
+        windData1 = {
+                {{1000.1, 0.1}, {50.1, 3}},
+                {{1000.1, 1000.1}, {70.1, 3}},
+        };
+        waypoints = {{1000.0, 0}, {1000, 1000}, {2000, 1000}};
 
     }
 public:
@@ -27,28 +31,26 @@ public:
         pBatteryEstimation = new SimpleBatteryEstimation;
 
         }
-
-
         virtual ~SimpleEstimation() {
             delete pBatteryEstimation;
         }
 
     AbstractBatteryEstimation* pBatteryEstimation;
     std::vector<Coordinates> waypoints;
-    std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    double batteryEstimate1 = initialBatteryLevel - (2.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
-    double batteryEstimate2 = initialBatteryLevel - (20.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
-
+    double batteryEstimate1 = initialBatteryLevel - (3000.0/ (static_cast<float>(airSpeed) + 100)) *
+                                                    (energyConsumption / SECONDSPERHOUR);
     };
 
 
-TEST_F(SimpleEstimation, baseline) {
-EXPECT_EQ(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
+TEST_F(SimpleEstimation, tailWind) {
+EXPECT_NEAR(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData,
+                                                                          energyConsumption), 1e-1);
 }
-TEST_F(SimpleEstimation, increasedWind) {
-EXPECT_EQ(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
+TEST_F(SimpleEstimation, WindError) {
+ASSERT_THROW(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1,
+                                                                        energyConsumption), WindError);
 }
 
 

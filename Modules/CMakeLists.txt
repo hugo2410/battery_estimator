@@ -2,6 +2,7 @@ project(Modules)
 
 set(HEADER_FILES
         AbstractBatteryEstimation.h
+        AbstractError.h
         )
 
 set(SOURCE_FILES

@@ -3,6 +3,7 @@
 //
 
 #include "SimpleBatteryEstimation.h"
+#include "iostream"
 
 
 SimpleBatteryEstimation::SimpleBatteryEstimation(){};
@@ -21,16 +22,18 @@ double SimpleBatteryEstimation::computeRemainingBattery(double initBattery, cons
         // Update drone's position
         aircraftPosition = waypoint;
         // find closest wind measurement to the next waypoint
-        double closestDistance = 0;
+        double closestDistance = std::numeric_limits<double>::infinity();
         WindInfo closestMeasurementInfo = {0, 0};
         for (auto windValue: windData){
             double tmpDist = computeDistance(aircraftPosition, windValue.first);
             if (closestDistance > tmpDist){
-                closestMeasurementInfo = windValue.second;
+                closestMeasurementInfo.speed = windValue.second.speed;
+                closestMeasurementInfo.direction = windValue.second.direction;
                 closestDistance = tmpDist;
             }
         }
-        speed = airSpeed + computeFacingWind(closestMeasurementInfo);
+        speed = airSpeed + computeHeadWind(closestMeasurementInfo);
+
         // Update the amount of battery left after having flown to the next waypoint
         if (speed > 0){
             initBattery -= (distance / speed) * (energyConsumption / SECONDSPERHOUR);
@@ -41,7 +44,7 @@ double SimpleBatteryEstimation::computeRemainingBattery(double initBattery, cons
     return initBattery;
 }
 
-double  SimpleBatteryEstimation::computeFacingWind(WindInfo windValue){
+double  SimpleBatteryEstimation::computeHeadWind(WindInfo windValue){
 
     return windValue.speed * cos(windValue.direction);
 }

@@ -6,6 +6,7 @@
 #define BATTERY_ESTIMATOR_SIMPLEBATTERYESTIMATION_H
 
 #include "AbstractBatteryEstimation.h"
+#include "AbstractError.h"
 
 
 /*
@@ -40,7 +41,7 @@ public:
     * @param windValue: WindInfo object containing the speed (m/s) and the direction (rad)
     * @return Wind speed (m/s) along the aircraft's direction
     */
-    double computeFacingWind(WindInfo windValue);
+    double computeHeadWind(WindInfo windValue);
 
     /**
     * \brief Computes the Euclidean distance between two points
