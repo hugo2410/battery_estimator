@@ -1,0 +1,36 @@
+
+# unix files
+*~
+
+# eclipse
+.settings/
+build/
+.cproject
+.project
+
+# vscode
+.vscode/*
+
+# build
+*.o
+*.d
+
+# Log files
+
+/build/
+/Debug/
+/out/
+/log/
+/obclogs/
+/focus_cal/
+/metadata/
+/recovered_data/
+CameraCache.json
+fs_release/
+
+# python
+.venv
+venv
+.python-version
+*.egg-info
+
