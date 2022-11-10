@@ -7,13 +7,12 @@
 
 AdvancedBatteryEstimation::AdvancedBatteryEstimation(){};
 
-std::vector<double>  AdvancedBatteryEstimation::computeRemainingBattery(double initBattery,
+bool AdvancedBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                       const std::vector<Coordinates> &waypoints,
                                                                       const  std::unordered_map<Coordinates,
                                                                               WindInfo, boost::hash<Coordinates>> &windData,
                                                                       double energyConsumption){
 
-    std::vector<double> batteryEstimation;
     Coordinates aircraftPosition = {0,0};
     double distance = 0, speed = 0;
     for (auto waypoint:waypoints){
@@ -24,14 +23,24 @@ std::vector<double>  AdvancedBatteryEstimation::computeRemainingBattery(double i
         // find closest wind measurement to the waypoint
         double closestDistance = std::numeric_limits<double>::infinity();
         WindInfo closestMeasurementInfo = {0, 0};
+        unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windDataInRange;
         for (auto windValue: windData){
             double tmpDist = computeDistance(aircraftPosition, windValue.first);
             if (closestDistance > tmpDist){
                 closestMeasurementInfo = windValue.second;
                 closestDistance = tmpDist;
             }
+            if (tmpDist < maxRangeWindMeasurement){
+                windDataInRange[windValue.first] = windValue.second;
+            }
         }
-        speed = airSpeed + computeFacingWind(closestMeasurementInfo);
+        // if there is only one waypoint or none within the range, then take the closest one
+        if (windDataInRange.size() < 2) {
+            speed = airSpeed + computeFacingWind(closestMeasurementInfo);
+        } else {
+
+        }
+
         // Update the amount of battery left after having flown to the next waypoint
         if (speed > 0){
             initBattery -= (distance / speed) * (energyConsumption / SECONDSPERHOUR);
@@ -41,12 +50,20 @@ std::vector<double>  AdvancedBatteryEstimation::computeRemainingBattery(double i
     return batteryEstimation;
 }
 
-double  AdvancedBatteryEstimation::computeFacingWind(WindInfo windValue){
+double AdvancedBatteryEstimation::computeFacingWind(WindInfo windValue){
 
     return windValue.speed * cos(windValue.direction);
 }
 
-double  AdvancedBatteryEstimation::computeDistance(Coordinates point1, Coordinates point2){
+double AdvancedBatteryEstimation::computeLinearWindEstimation(const std::unordered_map<Coordinates,
+                                                                WindInfo, boost::hash<Coordinates>> &windDataInRange){
+   for (auto& windValue: windDataInRange){
+
+   }
+}
+
+
+double AdvancedBatteryEstimation::computeDistance(Coordinates point1, Coordinates point2){
 
     return sqrt(pow((point1.first - point2.first), 2) + pow((point1.second - point2.second), 2));
 }

@@ -25,7 +25,7 @@ public:
     * @param energyConsumption: value of the power needed to fly at 30m/s
     * @return Vector containing the battery estimates at each waypoint.
     */
-    std::vector<double> computeRemainingBattery(double initBattery,
+    bool computeRemainingBattery(double initBattery,
                                                 const std::vector<Coordinates> &WayPoints,
                                                 const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
                                                 double energyConsumption);

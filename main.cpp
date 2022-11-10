@@ -31,21 +31,19 @@ int main(int argc, char *argv[]) {
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
     pBatteryEstimation = new SimpleBatteryEstimation;
-    std::vector<double> batteryEstimation;
     try {
-        batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel,
-                                                                        waypoints,
-                                                                        windData,
-                                                                        energyConsumption);
-        cout << "Battery estimatation at each waypoint is :";
-        for (auto estimate: batteryEstimation) {
-            cout << estimate << " ";
+        if (pBatteryEstimation->computeRemainingBattery(initialBatteryLevel,
+                                                        waypoints,
+                                                        windData,
+                                                        energyConsumption)){
+            cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
+        } else {
+            cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
         }
     } catch(AbstractError& e) {
         cerr << "Exception thrown: " << e.what() << endl;
         return -1;
-    }
-    delete pBatteryEstimation;
 
+    delete pBatteryEstimation;
     return 0;
 }
