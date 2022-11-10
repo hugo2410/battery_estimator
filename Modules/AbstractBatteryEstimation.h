@@ -17,11 +17,15 @@ class AbstractBatteryEstimation {
 public:
 
     /**
-     * \brief Abstract function to compute the amount of battery left
-     * @param pRandom : pRandom : Pointer to a random variables.
-     * @return Vector containing the battery estimates at each waypoint.
+     * \brief Abstract function of the battery estimation fucntion
+    * @param initBattery: value of the battery at the beginning of the flight (Wh)
+    * @param WayPoints: vector containing the list of coordinates of each waypoint
+    * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
+    * of the measurements
+    * @param energyConsumption: value of the power needed to fly at 30m/s
+    * @return Estimation of the remaining battery (Wh)
      */
-    virtual bool computeRemainingBattery(double initBattery,
+    virtual double computeRemainingBattery(double initBattery,
                                                         const std::vector<Coordinates> &WayPoints,
                                                         const  std::unordered_map<Coordinates, WindInfo,
                                                                                     boost::hash<Coordinates>> &WindData,

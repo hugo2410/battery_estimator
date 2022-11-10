@@ -6,7 +6,7 @@
 
 NaiveBatteryEstimation::NaiveBatteryEstimation(){};
 
-bool NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
+double NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                        const std::vector<Coordinates> &waypoints,
                                                                        const  std::unordered_map<Coordinates,
                                                                        WindInfo, boost::hash<Coordinates>> &windData,
