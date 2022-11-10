@@ -7,7 +7,7 @@
 
 #include "AbstractBatteryEstimation.h"
 
-class AdvancedBatteryEstimation : AbstractBatteryEstimation
+class AdvancedBatteryEstimation : public AbstractBatteryEstimation
 {
 public:
     /*
@@ -26,15 +26,15 @@ public:
     * @return Remaining battery energy (Wh)
     */
     double computeRemainingBattery(double initBattery,
-                                                const std::vector<Coordinates> &WayPoints,
-                                                const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
-                                                double energyConsumption);
+                                    const std::vector<Coordinates> &WayPoints,
+                                    const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
+                                    double energyConsumption);
     /**
     * \brief Computes the longitudinal component of the wind
     * @param windValue: WindInfo object containing the speed (m/s) and the direction (rad)
     * @return Wind speed (m/s) along the aircraft's direction
     */
-    double computeFacingWind(WindInfo windValue);
+    double computeHeadWind(WindInfo windValue);
 
     /**
     * \brief Computes the Euclidean distance between two points
@@ -45,12 +45,12 @@ public:
     double computeDistance(Coordinates point1, Coordinates point2);
 
     /**
-    * \brief Computes the decay of the value, I used 1/e^x, as I wanted a function which was rapidly decreasing but
+    * \brief Computes the decay of the value, I used 1/e^(x/10), as I wanted a function which was rapidly decreasing but
      * also a function which would return 1 when x=0
-    * @param speedComponent: wind speed component
+    * @param distance: distance to measurement point
     * @return weighted value
     */
-    double computeDecay(double speedComponent);
+    double computeDecay(double distance);
 };
 
 #endif //BATTERY_ESTIMATOR_ADVANCEDBATTERYESTIMATION_H

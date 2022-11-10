@@ -3,6 +3,8 @@
 //
 
 #include "AdvancedBatteryEstimation.h"
+#include "AbstractError.h"
+#include "iostream"
 
 
 AdvancedBatteryEstimation::AdvancedBatteryEstimation(){};
@@ -14,7 +16,7 @@ double AdvancedBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                       double energyConsumption){
 
     Coordinates aircraftPosition = {0,0};
-    double distance = 0;
+    double distance;
     for (auto waypoint:waypoints){
         // Compute the distance flown between each waypoint
         distance = computeDistance(waypoint, aircraftPosition);
@@ -23,24 +25,26 @@ double AdvancedBatteryEstimation::computeRemainingBattery(double initBattery,
         double speed = airSpeed;
         for (auto windValue: windData){
             double tmpDist = computeDistance(aircraftPosition, windValue.first);
-            double windComponent = computeFacingWind(windValue.second);
-            speed += computeDecay(windComponent);
+            double windComponent = computeHeadWind(windValue.second);
+            
+            speed += windComponent * computeDecay(tmpDist);
         }
         // Update the amount of battery left after having flown to the next waypoint
         if (speed > 0){
             initBattery -= (distance / speed) * (energyConsumption / SECONDSPERHOUR);
+        } else {
+            throw WindError();
         }
     }
     return initBattery;
 }
 
-double AdvancedBatteryEstimation::computeFacingWind(WindInfo windValue){
-
+double AdvancedBatteryEstimation::computeHeadWind(WindInfo windValue){
     return windValue.speed * cos(windValue.direction);
 }
 
 double AdvancedBatteryEstimation::computeDecay(double speedComponent){
-   return 1/(exp(speedComponent));
+   return 1/(exp(speedComponent/10));
 }
 
 
