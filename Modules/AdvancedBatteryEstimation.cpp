@@ -4,7 +4,6 @@
 
 #include "AdvancedBatteryEstimation.h"
 #include "AbstractError.h"
-#include "iostream"
 
 
 AdvancedBatteryEstimation::AdvancedBatteryEstimation(){};
@@ -23,12 +22,15 @@ double AdvancedBatteryEstimation::computeRemainingBattery(double initBattery,
         // Update drone's position
         aircraftPosition = waypoint;
         double speed = airSpeed;
+        double windComponent = 0;
         for (auto windValue: windData){
             double tmpDist = computeDistance(aircraftPosition, windValue.first);
-            double windComponent = computeHeadWind(windValue.second);
-            
-            speed += windComponent * computeDecay(tmpDist);
+            double tmpWindComponent = computeHeadWind(windValue.second) * computeDecay(tmpDist);
+            if (abs(tmpWindComponent - windComponent) > 0){
+                windComponent += tmpWindComponent;
+            }
         }
+        speed += windComponent ;
         // Update the amount of battery left after having flown to the next waypoint
         if (speed > 0){
             initBattery -= (distance / speed) * (energyConsumption / SECONDSPERHOUR);

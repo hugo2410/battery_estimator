@@ -48,7 +48,7 @@ public:
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData2;
     double batteryEstimate1 = initialBatteryLevel - (3000.0/ static_cast<float>(airSpeed)) *
                               (static_cast<float>(energyConsumption)  / SECONDSPERHOUR);
-    double batteryEstimate2 = initialBatteryLevel - (3000.0/ (static_cast<float>(airSpeed) + 20)) *
+    double batteryEstimate2 = initialBatteryLevel - (3000.0/ (static_cast<float>(airSpeed) + 9)) *
                                                     (static_cast<float>(energyConsumption)  / SECONDSPERHOUR);
 
 };
