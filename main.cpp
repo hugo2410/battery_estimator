@@ -39,5 +39,7 @@ int main(int argc, char *argv[]) {
     for (auto estimate: batteryEstimation){
         cout<< estimate<< " ";
     }
+    delete pBatteryEstimation;
+
     return 0;
 }
