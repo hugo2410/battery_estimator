@@ -31,7 +31,7 @@ std::vector<double>  SimpleBatteryEstimation::computeRemainingBattery(double ini
                 closestDistance = tmpDist;
             }
         }
-        speed = airSpeed - computeFacingWind(closestMeasurementInfo);
+        speed = airSpeed + computeFacingWind(closestMeasurementInfo);
         // Update the amount of battery left after having flown to the next waypoint
         if (speed > 0){
             initBattery -= (distance / speed) * (energyConsumption / SECONDSPERHOUR);
