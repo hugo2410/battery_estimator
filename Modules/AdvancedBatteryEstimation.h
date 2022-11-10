@@ -44,7 +44,5 @@ public:
     */
     double computeDistance(Coordinates point1, Coordinates point2);
 };
-};
-
 
 #endif //BATTERY_ESTIMATOR_ADVANCEDBATTERYESTIMATION_H

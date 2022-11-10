@@ -19,27 +19,14 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    AbstractBatteryEstimation *pBatteryEstimation{nullptr};
-
-    pBatteryEstimation = new NaiveBatteryEstimation;
 
     const unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData({
-<<<<<<<<< Temporary merge branch 1
         {{12.1, 1.1}, {5.1, 2}},
         {{4.1, 15.1}, {7.1, 3.1}},
         {{5.1, -1.1}, {-5.1, -1.2}},
         {{11.1, 11.1}, {-15.1, 2}},
     });
     const vector<Coordinates> waypoints = {{3.1, 7.1}, {2.6, 1.1}, {-1.1, 21}, {12.1, 1.1}};
-
-    pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption);
-=========
-                                                              {{12.1, 1.1}, {5.1, 2}},
-                                                              {{4.1, 15.1}, {7.1, 3.1}},
-                                                              {{5.1, -1.1}, {-5.1, -1.2}},
-                                                              {{11.1, 11.1}, {-15.1, 2}}, });
-    const vector<Coordinates> waypoints = {{3.1, 7.1}, {2.6, 1.1}, {-1.1, 21}, {12.1, 1.1}};
->>>>>>>>> Temporary merge branch 2
 
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
@@ -59,7 +46,6 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     delete pBatteryEstimation;
-
 
     return 0;
 }
