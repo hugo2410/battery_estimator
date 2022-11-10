@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <boost/functional/hash.hpp>
 #include "Helper.h"
+#include "AbstractError.h"
 
 /**
  * \brief Abstract class for battery estimation
