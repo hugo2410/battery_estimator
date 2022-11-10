@@ -14,6 +14,7 @@
  */
 class NaiveBatteryEstimation : public AbstractBatteryEstimation
 {
+public:
     /*
 	 * \brief: Default Constructor
 	 */
