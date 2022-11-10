@@ -4,11 +4,10 @@
 
 
 #include "gtest/gtest.h"
-#include "AbstractBatteryEstimation.h"
-#include "NaiveBatteryEstimation.h"
+#include "../Modules/AbstractBatteryEstimation.h"
+#include "../Modules/NaiveBatteryEstimation.h"
 #include <cmath>
 
-using::testing::_;
 
 class NaiveEstimation : public ::testing::Test
 {
@@ -48,18 +47,18 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0 * energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
-    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0 * energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
 
 };
 
 TEST_F(NaiveEstimation, baseline) {
-    EXPECT_EQ(batteryEstimate1, ElementsAre(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption)));
+    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
 }
 TEST_F(NaiveEstimation, increasedWind) {
-    EXPECT_EQ(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
+    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
 }
 TEST_F(NaiveEstimation, increasedDistance) {
-    EXPECT_EQ(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints1, windData, energyConsumption));
+    EXPECT_EQ(false, pBatteryEstimation->computeRemainingBattery(batteryMargin, waypoints1, windData, energyConsumption));
 }
 

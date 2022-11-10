@@ -4,13 +4,26 @@
 Birch Hugo 
 
 ### Description
-This project is an introduction to scientific programming in C ++. It is registered as part of the Programming Concepts in Scientific Computing course(https://edu.epfl.ch/coursebook/fr/programming-concepts-in-scientific-computing-MATH-458).
+This project aims to deliver a battery estimator module taking the following inputs:
 
-The objective of the project is the creation of a Monte Carlo algorithm in a modular way. To do this, the following objectives have been achieved :
-* Implementation of random number generators with a normal & uniform probability distribution.
-* The compute of the expectation value of a user-defined function
-* The visualization of the statistical moments
-* The graphical verification of Central Limit Theorem (CTL)
+* Initial battery (Wh)
+* Ordered list of waypoints (the black dots, simplified to be 2D (m) for this problem)
+* Unordered list of wind samples (2D location (m), wind speed (m/s), wind direction (rad))
+* The airspeed at which we fly (m/s); 30m/s, which is constant throughout the mission
+  * Note: we fly at a constant speed in the wind frame, which means wind affects our
+    ground speed, not our airspeed 
+* The power needed to fly at the provided constant airspeed (Watts)
+
+The module outputs a list with the battery estimate at each waypoint
+
+It was decided to implement 3 different logics, the first being the "naive" one which would mimic the current
+implementation which needs to be improved. Then I created two branches building up onto this skeleton and offers
+more realistic approaches. The aim was to show how I would develop new features. 
+
+The "naive" implementation ignores the wind and assumes a constant depletion of the battery across the journey.
+
+The "simple" implementation which is developed on the branch "feature/simple_implementation", the assumption used is 
+that the wind along the journey will correspond to the wind at the closest measured point.
 
 ### How It Works
 

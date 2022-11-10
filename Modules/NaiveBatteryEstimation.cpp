@@ -6,12 +6,12 @@
 
 NaiveBatteryEstimation::NaiveBatteryEstimation(){};
 
-std::vector<double>  NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
+bool NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                        const std::vector<Coordinates> &waypoints,
                                                                        const  std::unordered_map<Coordinates,
                                                                        WindInfo, boost::hash<Coordinates>> &windData,
                                                                        double energyConsumption){
-    std::vector<double> batteryEstimation;
+
     double x = 0, y = 0;
     double distance = 0;
     for (auto waypoint:waypoints) {
@@ -20,7 +20,10 @@ std::vector<double>  NaiveBatteryEstimation::computeRemainingBattery(double init
         // Update the amount of battery left after having flown to the next waypoint
         initBattery -= (distance / airSpeed) * (energyConsumption / SECONDSPERHOUR);
 
-        batteryEstimation.push_back(initBattery);
     }
-    return batteryEstimation;
+    if (initBattery > batteryMargin){
+        return true;
+    } else {
+        return false;
+    }
 }
