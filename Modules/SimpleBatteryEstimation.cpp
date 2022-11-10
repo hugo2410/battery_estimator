@@ -7,7 +7,7 @@
 
 SimpleBatteryEstimation::SimpleBatteryEstimation(){};
 
-std::vector<double>  SimpleBatteryEstimation::computeRemainingBattery(double initBattery,
+bool SimpleBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                      const std::vector<Coordinates> &waypoints,
                                                                      const  std::unordered_map<Coordinates,
                                                                              WindInfo, boost::hash<Coordinates>> &windData,
@@ -38,9 +38,12 @@ std::vector<double>  SimpleBatteryEstimation::computeRemainingBattery(double ini
         } else {
             throw WindError();
         }
-        batteryEstimation.push_back(initBattery);
     }
-    return batteryEstimation;
+    if (initBattery > batteryMargin){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 double  SimpleBatteryEstimation::computeFacingWind(WindInfo windValue){

@@ -44,16 +44,11 @@ public:
     };
 
 
-TEST_F(SimpleEstimation, mean_check) {
-    EXPECT_EQ(pRandomNormal->get_mean(),TEST_MEAN);
+TEST_F(SimpleEstimation, baseline) {
+EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
 }
-
-TEST_F(SimpleEstimation, variance_check) {
-    EXPECT_EQ(pRandomNormal->get_var(),TEST_VARIANCE);
-}
-
-TEST_F(SimpleEstimation, size_check) {
-    EXPECT_EQ(pRandomNormal->get_vector().size(),TEST_SIZE);
+TEST_F(SimpleEstimation, increasedWind) {
+EXPECT_EQ(false, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
 }
 
 
