@@ -2,33 +2,15 @@
 // Created by hugo on 09/11/22.
 //
 
-#ifndef BATTERY_ESTIMATOR_HELPER_H
-#define BATTERY_ESTIMATOR_HELPER_H
+#define SECONDSPERHOUR 3600
 
+typedef std::pair<uint8_t, uint8_t>     Coordinates;
 
-class Helper {
-
-public:
-
-    struct Coordinates {
-        float x;
-        float y;
-    };
-
-    struct WindInfo {
-        float speed;
-        float direction;
-    };
-
-    static constexpr int                    initialBatteryLevel = 22;
-
-
-    int getEnergyConsumption(const float speed) const { return energyConsumption; }
-
-private:
-
-    static constexpr int                    energyConsumption = 22;
+struct WindInfo {
+    float speed;
+    float direction;
 };
 
-
-#endif //BATTERY_ESTIMATOR_HELPER_H
+static constexpr int                    initialBatteryLevel = 22;
+static constexpr int                    energyConsumption = 2.0;
+static constexpr int                    airSpeed = 30;
