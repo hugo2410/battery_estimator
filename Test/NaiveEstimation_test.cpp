@@ -8,6 +8,7 @@
 #include "NaiveBatteryEstimation.h"
 #include <cmath>
 
+using::testing::_;
 
 class NaiveEstimation : public ::testing::Test
 {
@@ -47,8 +48,8 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
-    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0 * energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0 * energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
 
 };
 

@@ -20,6 +20,20 @@ class SimpleEstimation : public ::testing::Test
 protected:
     virtual void TearDown() {
 
+        windData = {
+                {{12.1, 1.1}, {5.1, 2}},
+                {{4.1, 15.1}, {7.1, 3.1}},
+                {{5.1, -1.1}, {-5.1, -1.2}},
+                {{11.1, 11.1}, {-15.1, 2}},
+        };
+        windData = {
+                {{12.1, 1.1}, {50.1, 2}},
+                {{4.1, 15.1}, {70.1, 3.1}},
+                {{5.1, -1.1}, {-50.1, -1.2}},
+                {{11.1, 11.1}, {-150.1, 2}},
+        };
+        waypoints = {{1.0, 0}, {1, 1}};
+        waypoints1 = {{10.0, 0}, {10, 1}};
 
     }
 public:
@@ -45,15 +59,15 @@ public:
 
 
 TEST_F(SimpleEstimation, mean_check) {
-    EXPECT_EQ(pRandomNormal->get_mean(),TEST_MEAN);
+    EXPECT_EQ(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption),TEST_MEAN);
 }
 
 TEST_F(SimpleEstimation, variance_check) {
-    EXPECT_EQ(pRandomNormal->get_var(),TEST_VARIANCE);
+    EXPECT_EQ(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption),TEST_VARIANCE);
 }
 
 TEST_F(SimpleEstimation, size_check) {
-    EXPECT_EQ(pRandomNormal->get_vector().size(),TEST_SIZE);
+    EXPECT_EQ(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption),TEST_SIZE);
 }
 
 
