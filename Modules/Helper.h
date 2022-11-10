@@ -11,7 +11,7 @@ struct WindInfo {
     float direction;
 };
 
-static constexpr int                    initialBatteryLevel = 22;
-static constexpr int                    energyConsumption = 2;
+static constexpr int                    initialBatteryLevel = 20;
+static constexpr int                    energyConsumption = 36;
 static constexpr int                    airSpeed = 30;
 static constexpr int                    batteryMargin = 2;

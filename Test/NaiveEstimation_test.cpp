@@ -24,14 +24,14 @@ protected:
                   {{5.1, -1.1}, {-5.1, -1.2}},
                   {{11.1, 11.1}, {-15.1, 2}},
           };
-        windData = {
+        windData1 = {
                 {{12.1, 1.1}, {50.1, 2}},
                 {{4.1, 15.1}, {70.1, 3.1}},
                 {{5.1, -1.1}, {-50.1, -1.2}},
                 {{11.1, 11.1}, {-150.1, 2}},
         };
         waypoints = {{1.0, 0}, {1, 1}};
-        waypoints1 = {{10.0, 0}, {10, 1}};
+        waypoints1 = {{10.0, 0}, {10, 10}};
     }
 public:
     NaiveEstimation() : Test() {
@@ -47,8 +47,8 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
-    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    double batteryEstimate1 = initialBatteryLevel - (2.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
+    double batteryEstimate2 = initialBatteryLevel - (20.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
 
 };
 
