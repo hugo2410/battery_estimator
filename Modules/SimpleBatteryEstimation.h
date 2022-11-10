@@ -29,12 +29,12 @@ public:
     * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
     * of the measurements
     * @param energyConsumption: value of the power needed to fly at 30m/s
-    * @return True if the battery level is sufficient to reach the final waypoint, false otherwise
+    * @return Estimation of the remaining battery (Wh)
     */
-    bool computeRemainingBattery(double initBattery,
-                                                const std::vector<Coordinates> &WayPoints,
-                                                const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
-                                                double energyConsumption);
+    double computeRemainingBattery(double initBattery,  const std::vector<Coordinates> &WayPoints,
+                                const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
+                                double energyConsumption);
+
     /**
     * \brief Computes the longitudinal component of the wind
     * @param windValue: WindInfo object containing the speed (m/s) and the direction (rad)

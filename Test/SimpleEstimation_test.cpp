@@ -38,17 +38,17 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    std::vector<double> batteryEstimate1 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
-    std::vector<double> batteryEstimate2 = {initialBatteryLevel - 1.0*energyConsumption, initialBatteryLevel - 2.0*energyConsumption};
+    double batteryEstimate1 = initialBatteryLevel - (2.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
+    double batteryEstimate2 = initialBatteryLevel - (20.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
 
     };
 
 
 TEST_F(SimpleEstimation, baseline) {
-EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
+EXPECT_EQ(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
 }
 TEST_F(SimpleEstimation, increasedWind) {
-EXPECT_EQ(false, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
+EXPECT_EQ(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
 }
 
 

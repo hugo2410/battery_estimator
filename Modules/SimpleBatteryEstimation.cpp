@@ -7,13 +7,12 @@
 
 SimpleBatteryEstimation::SimpleBatteryEstimation(){};
 
-bool SimpleBatteryEstimation::computeRemainingBattery(double initBattery,
-                                                                     const std::vector<Coordinates> &waypoints,
-                                                                     const  std::unordered_map<Coordinates,
-                                                                             WindInfo, boost::hash<Coordinates>> &windData,
-                                                                     double energyConsumption){
+double SimpleBatteryEstimation::computeRemainingBattery(double initBattery, const std::vector<Coordinates> &waypoints,
+                                                         const  std::unordered_map<Coordinates,
+                                                                 WindInfo, boost::hash<Coordinates>> &windData,
+                                                         double energyConsumption){
 
-    std::vector<double> batteryEstimation;
+
     Coordinates aircraftPosition = {0,0};
     double distance = 0, speed = 0;
     for (auto waypoint:waypoints){
@@ -39,11 +38,7 @@ bool SimpleBatteryEstimation::computeRemainingBattery(double initBattery,
             throw WindError();
         }
     }
-    if (initBattery > batteryMargin){
-        return true;
-    } else {
-        return false;
-    }
+    return initBattery;
 }
 
 double  SimpleBatteryEstimation::computeFacingWind(WindInfo windValue){
