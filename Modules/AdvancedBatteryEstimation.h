@@ -16,16 +16,16 @@ public:
     AdvancedBatteryEstimation();
 
     /**
-    * \brief  Simple function to compute the amount of battery left, it finds the closest point and computes the delta
-    * in ground speed due to wind
+    * \brief  Advanced function to compute the amount of battery left, it computes the longitudinal component for each
+     * measurement and applies a decay function to each of these values.
     * @param initBattery: value of the battery at the beginning of the flight (Wh)
     * @param WayPoints: vector containing the list of coordinates of each waypoint
     * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
     * of the measurements
-    * @param energyConsumption: value of the power needed to fly at 30m/s
-    * @return Vector containing the battery estimates at each waypoint.
+    * @param energyConsumption: value of the power needed to fly at 30m/s (Watts)
+    * @return Remaining battery energy (Wh)
     */
-    bool computeRemainingBattery(double initBattery,
+    double computeRemainingBattery(double initBattery,
                                                 const std::vector<Coordinates> &WayPoints,
                                                 const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
                                                 double energyConsumption);
@@ -43,6 +43,14 @@ public:
     * @return Distance (m) between the two points
     */
     double computeDistance(Coordinates point1, Coordinates point2);
+
+    /**
+    * \brief Computes the decay of the value, I used 1/e^x, as I wanted a function which was rapidly decreasing but
+     * also a function which would return 1 when x=0
+    * @param speedComponent: wind speed component
+    * @return weighted value
+    */
+    double computeDecay(double speedComponent);
 };
 
 #endif //BATTERY_ESTIMATOR_ADVANCEDBATTERYESTIMATION_H

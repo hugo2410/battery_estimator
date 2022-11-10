@@ -13,7 +13,7 @@ bool SimpleBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                              WindInfo, boost::hash<Coordinates>> &windData,
                                                                      double energyConsumption){
 
-    std::vector<double> batteryEstimation;
+    double batteryEstimation;
     Coordinates aircraftPosition = {0,0};
     double distance = 0, speed = 0;
     for (auto waypoint:waypoints){
