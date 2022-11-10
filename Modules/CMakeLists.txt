@@ -1,10 +1,13 @@
 project(Modules)
 
 set(HEADER_FILES
-    AbstractBatteryEstimation.h
-    NaiveBatteryEstimation.h
-    SimpleBatteryEstimation.h
-    AdvancedBatteryEstimation.h)
+        AbstractBatteryEstimation.h
+        AbstractError.h
+        AbstractBatteryEstimation.h
+        NaiveBatteryEstimation.h
+        SimpleBatteryEstimation.h
+        AdvancedBatteryEstimation.h)
+
 
 set(SOURCE_FILES
         Helper.h

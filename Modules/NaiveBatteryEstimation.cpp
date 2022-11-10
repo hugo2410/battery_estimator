@@ -3,27 +3,25 @@
 //
 
 #include "NaiveBatteryEstimation.h"
+#include "iostream"
 
 NaiveBatteryEstimation::NaiveBatteryEstimation(){};
 
-bool NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
+double NaiveBatteryEstimation::computeRemainingBattery(double initBattery,
                                                                        const std::vector<Coordinates> &waypoints,
                                                                        const  std::unordered_map<Coordinates,
                                                                        WindInfo, boost::hash<Coordinates>> &windData,
                                                                        double energyConsumption){
 
-    double x = 0, y = 0;
     double distance = 0;
+    Coordinates aircraftPosition = {0,0};
     for (auto waypoint:waypoints) {
         // Compute the distance flown between each waypoint
-        distance = sqrt(pow((waypoint.first - x), 2) + pow((waypoint.second - y), 2));
+        distance = sqrt(pow((waypoint.first - aircraftPosition.first), 2) +
+                   pow((waypoint.second - aircraftPosition.second), 2));
+        aircraftPosition = waypoint;
         // Update the amount of battery left after having flown to the next waypoint
         initBattery -= (distance / airSpeed) * (energyConsumption / SECONDSPERHOUR);
-
     }
-    if (initBattery > batteryMargin){
-        return true;
-    } else {
-        return false;
-    }
+    return initBattery;
 }
