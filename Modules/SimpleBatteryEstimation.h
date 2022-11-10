@@ -2,8 +2,8 @@
 // Created by hugo on 09/11/22.
 //
 
-#ifndef BATTERY_ESTIMATOR_NAIVEBATTERYESTIMATION_H
-#define BATTERY_ESTIMATOR_NAIVEBATTERYESTIMATION_H
+#ifndef BATTERY_ESTIMATOR_SIMPLEBATTERYESTIMATION_H
+#define BATTERY_ESTIMATOR_SIMPLEBATTERYESTIMATION_H
 
 #include "AbstractBatteryEstimation.h"
 
@@ -12,16 +12,17 @@
  * Naive implementation for the battery estimation with constant depletion of the battery, only considering the time
  * it would take to reach the home.
  */
-class NaiveBatteryEstimation : public AbstractBatteryEstimation
+
+class SimpleBatteryEstimation : public AbstractBatteryEstimation
 {
 public:
     /*
 	 * \brief: Default Constructor
 	 */
-    NaiveBatteryEstimation();
+    SimpleBatteryEstimation();
 
     /**
-    * \brief Naive implementation to compute the amount of battery left
+    * \brief Abstract function to compute the amount of battery left
     * @param initBattery: value of the battery at the beginning of the flight (Wh)
     * @param WayPoints: vector containing the list of coordinates of each waypoint
     * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
@@ -33,7 +34,19 @@ public:
                                                 const std::vector<Coordinates> &WayPoints,
                                                 const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
                                                 double energyConsumption);
+    /**
+    * \brief Abstract function to compute the amount of battery left
+    * @param initBattery: value of the battery at the beginning of the flight (Wh)
+    * @param WayPoints: vector containing the list of coordinates of each waypoint
+    * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
+    * of the measurements
+    * @param energyConsumption: value of the power needed to fly at 30m/s
+    * @return Vector containing the battery estimates at each waypoint.
+    */
+    double computeFacingWind(WindInfo windValue);
+
+    double computeDistance(Coordinates point1, Coordinates point2);
 };
 
 
-#endif //BATTERY_ESTIMATOR_NAIVEBATTERYESTIMATION_H
+#endif //BATTERY_ESTIMATOR_SIMPLEBATTERYESTIMATION_H
