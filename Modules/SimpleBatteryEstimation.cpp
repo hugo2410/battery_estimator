@@ -22,7 +22,7 @@ std::vector<double>  SimpleBatteryEstimation::computeRemainingBattery(double ini
         // Update drone's position
         aircraftPosition = waypoint;
         // find closest wind measurement to the next waypoint
-        double closestDistance = 0;
+        double closestDistance = std::numeric_limits<double>::infinity();
         WindInfo closestMeasurementInfo = {0, 0};
         for (auto windValue: windData){
             double tmpDist = computeDistance(aircraftPosition, windValue.first);
