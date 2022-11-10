@@ -21,7 +21,7 @@ public:
      * @param pRandom : pRandom : Pointer to a random variables.
      * @return Vector containing the battery estimates at each waypoint.
      */
-    virtual std::vector<double> computeRemainingBattery(double initBattery,
+    virtual bool computeRemainingBattery(double initBattery,
                                                         const std::vector<Coordinates> &WayPoints,
                                                         const  std::unordered_map<Coordinates, WindInfo,
                                                                                     boost::hash<Coordinates>> &WindData,

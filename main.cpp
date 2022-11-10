@@ -30,14 +30,15 @@ int main(int argc, char *argv[]) {
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
     pBatteryEstimation = new NaiveBatteryEstimation;
-    std::vector<double> batteryEstimation;
-    batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel,
+
+    if (pBatteryEstimation->computeRemainingBattery(initialBatteryLevel,
                                                                     waypoints,
                                                                     windData,
-                                                                    energyConsumption);
-    cout<< "Battery estimatation at each waypoint is :";
-    for (auto estimate: batteryEstimation){
-        cout<< estimate<< " ";
+                                                                    energyConsumption)){
+        cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
+    } else {
+        err<< " Caution: there is not enough battery to complete the flight plan"<<endl;
     }
+
     return 0;
 }
