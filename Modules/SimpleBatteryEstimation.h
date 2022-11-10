@@ -22,7 +22,8 @@ public:
     SimpleBatteryEstimation();
 
     /**
-    * \brief  function to compute the amount of battery left
+    * \brief  Simple function to compute the amount of battery left, it finds the closest point and computes the delta
+    * in ground speed due to wind
     * @param initBattery: value of the battery at the beginning of the flight (Wh)
     * @param WayPoints: vector containing the list of coordinates of each waypoint
     * @param WindData: unordered map containing the coordinates of the wind measurements and the speed and direction
@@ -42,9 +43,9 @@ public:
     double computeFacingWind(WindInfo windValue);
 
     /**
-    * \brief Computes the distance between two points
+    * \brief Computes the Euclidean distance between two points
     * @param point1: pair of coordinate
-    * @param point2: pair of coordinate 
+    * @param point2: pair of coordinate
     * @return Distance (m) between the two points
     */
     double computeDistance(Coordinates point1, Coordinates point2);
