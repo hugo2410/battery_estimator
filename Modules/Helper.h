@@ -4,7 +4,7 @@
 
 #define SECONDSPERHOUR 3600
 
-typedef std::pair<uint8_t, uint8_t>     Coordinates;
+typedef std::pair<int, int>     Coordinates;
 
 struct WindInfo {
     float speed;
@@ -12,6 +12,6 @@ struct WindInfo {
 };
 
 static constexpr int                    initialBatteryLevel = 20;
-static constexpr int                    energyConsumption = 36;
+static constexpr double                 energyConsumption = 36.0;
 static constexpr int                    airSpeed = 30;
 static constexpr int                    batteryMargin = 2;

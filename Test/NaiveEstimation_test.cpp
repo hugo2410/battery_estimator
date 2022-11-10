@@ -30,8 +30,8 @@ protected:
                 {{5.1, -1.1}, {-50.1, -1.2}},
                 {{11.1, 11.1}, {-150.1, 2}},
         };
-        waypoints = {{1.0, 0}, {1, 1}};
-        waypoints1 = {{10.0, 0}, {10, 10}};
+        waypoints = {{100.0, 0}, {100, 100}, {200, 100}};
+        waypoints1 = {{1000.0, 0}, {1000, 1000}, {2000, 1000}};
     }
 public:
     NaiveEstimation() : Test() {
@@ -47,18 +47,21 @@ public:
     std::vector<Coordinates> waypoints1;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData;
     std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> windData1;
-    double batteryEstimate1 = initialBatteryLevel - (2.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
-    double batteryEstimate2 = initialBatteryLevel - (20.0/ airSpeed) * (energyConsumption / SECONDSPERHOUR);
+    double batteryEstimate1 = initialBatteryLevel - (300.0/ static_cast<float>(airSpeed)) * (static_cast<float>(energyConsumption) / SECONDSPERHOUR);
+    double batteryEstimate2 = initialBatteryLevel - (3000.0/ static_cast<float>(airSpeed)) * (static_cast<float>(energyConsumption)  / SECONDSPERHOUR);
 
 };
 
 TEST_F(NaiveEstimation, baseline) {
-    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
+    EXPECT_NEAR(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData,
+                                                                              energyConsumption), 1e-1);
 }
 TEST_F(NaiveEstimation, increasedWind) {
-    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
+    EXPECT_NEAR(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1,
+                                                                              energyConsumption), 1e-1);
 }
 TEST_F(NaiveEstimation, increasedDistance) {
-    EXPECT_EQ(false, pBatteryEstimation->computeRemainingBattery(batteryMargin, waypoints1, windData, energyConsumption));
+    EXPECT_NEAR(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints1, windData,
+                                                                              energyConsumption), 1e-1);
 }
 
