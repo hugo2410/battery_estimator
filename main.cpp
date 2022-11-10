@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
                                                                     energyConsumption)){
         cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
     } else {
-        err<< " Caution: there is not enough battery to complete the flight plan"<<endl;
+        cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
     }
 
     return 0;

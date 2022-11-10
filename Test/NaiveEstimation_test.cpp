@@ -4,8 +4,8 @@
 
 
 #include "gtest/gtest.h"
-#include "AbstractBatteryEstimation.h"
-#include "NaiveBatteryEstimation.h"
+#include "../Modules/AbstractBatteryEstimation.h"
+#include "../Modules/NaiveBatteryEstimation.h"
 #include <cmath>
 
 
@@ -53,12 +53,12 @@ public:
 };
 
 TEST_F(NaiveEstimation, baseline) {
-    ASSERT_THAT(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
+    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData, energyConsumption));
 }
 TEST_F(NaiveEstimation, increasedWind) {
-    ASSERT_THAT(batteryEstimate1, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
+    EXPECT_EQ(true, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1, energyConsumption));
 }
 TEST_F(NaiveEstimation, increasedDistance) {
-    ASSERT_THAT(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints1, windData, energyConsumption));
+    EXPECT_EQ(false, pBatteryEstimation->computeRemainingBattery(batteryMargin, waypoints1, windData, energyConsumption));
 }
 
