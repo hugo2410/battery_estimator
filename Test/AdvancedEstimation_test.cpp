@@ -61,4 +61,3 @@ TEST_F(AdvancedEstimation, sameWinds) {
 EXPECT_NEAR(batteryEstimate2, pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData2,
         energyConsumption), 1e-1);
 }
-
