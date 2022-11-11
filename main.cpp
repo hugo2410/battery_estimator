@@ -13,6 +13,8 @@
 
 #include "AbstractBatteryEstimation.h"
 #include "NaiveBatteryEstimation.h"
+#include "SimpleBatteryEstimation.h"
+#include "AdvancedBatteryEstimation.h"
 
 
 using namespace std;
@@ -35,6 +37,7 @@ int main(int argc, char *argv[]) {
                                                                           energyConsumption);
     if (remainingBattery >= batteryMargin){
         cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
+        cout<< " Estimated remaining battery at end of mission: "<<batteryEstimation<<endl;
     } else {
         cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
     }
