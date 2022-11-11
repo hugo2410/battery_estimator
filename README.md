@@ -54,3 +54,7 @@ make
 cd Test
 ./RunAllTest
 ``` 
+
+### Doxygen
+The documentation was designed for doxygen 1.8.16 or higher.
+To generate the documentation, run the command : 'doxygen Doxyfile' in the terminal.
