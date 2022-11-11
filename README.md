@@ -76,4 +76,9 @@ cd Test
 
 ### Doxygen
 The documentation was designed for doxygen 1.8.16 or higher.
-To generate the documentation, run the command : 'doxygen Doxyfile' in the terminal.
+To generate the documentation, run the following commands in terminal : 
+```
+doxygen Doxyfile
+cd html
+``` 
+ Then open the index.html file, this will open an html page with the doxygen documentation.
