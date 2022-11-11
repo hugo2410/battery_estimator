@@ -14,6 +14,7 @@
 #include "AbstractBatteryEstimation.h"
 #include "NaiveBatteryEstimation.h"
 #include "SimpleBatteryEstimation.h"
+#include "AdvancedBatteryEstimation.h"
 
 
 using namespace std;
@@ -30,7 +31,7 @@ int main(int argc, char *argv[]) {
 
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
-    pBatteryEstimation = new SimpleBatteryEstimation;
+    pBatteryEstimation = new AdvancedBatteryEstimation;
     try {
         double batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints,
                                                                                windData,
