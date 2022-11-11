@@ -31,7 +31,8 @@ public:
     */
     double computeRemainingBattery(double initBattery,
                                                 const std::vector<Coordinates> &WayPoints,
-                                                const  std::unordered_map<Coordinates, WindInfo, boost::hash<Coordinates>> &WindData,
+                                                const  std::unordered_map<Coordinates, WindInfo,
+                                                        boost::hash<Coordinates>> &WindData,
                                                 double energyConsumption);
 };
 

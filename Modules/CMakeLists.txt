@@ -3,7 +3,6 @@ project(Modules)
 set(HEADER_FILES
         AbstractBatteryEstimation.h
         AbstractError.h
-        AbstractBatteryEstimation.h
         NaiveBatteryEstimation.h
         SimpleBatteryEstimation.h
         AdvancedBatteryEstimation.h)

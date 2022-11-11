@@ -14,7 +14,7 @@ This project aims to deliver a battery estimator module taking the following inp
     ground speed, not our airspeed 
 * The power needed to fly at the provided constant airspeed (Watts)
 
-The module outputs a list with the battery estimate at each waypoint
+The module outputs the battery estimate (Wh) at the end of the list of waypoints.
 
 I decided to implement 3 different logics, which would all use the same framework. The first being the "naive" one 
 which would mimic the current implementation which would be the baseline needing improvement. Then I created two 

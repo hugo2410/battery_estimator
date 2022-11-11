@@ -10,7 +10,6 @@
 #include <boost/functional/hash.hpp>
 #include "Helper.h"
 
-
 /**
  * \brief Abstract class for battery estimation
  */
