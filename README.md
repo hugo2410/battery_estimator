@@ -36,16 +36,35 @@ decay of each measurement using the distance to the waypoint and the exponential
 weighted measurement is then compared to the head wind component to ensure that two measurements don't 
 end up creating a stronger wind then the measurements themselves.
 
-### How It Works
+## Installation
+
+The following dependencies are required to build the code. The executable can be obtained either via 
+command line by cloning this repository via git or the executable can be found online at each release tags.
+
+### Dependencies
+
+The following dependencies are required to build and contribute to this repository:
+
+* CMake 3.2 or higher
+* git
+* gcc 5.4 or higher
+
+### Building the code
 
 To compile and run the executable, the following commands must be written in the terminal :
 ```
+git clone git@github.com:hugo2410/battery_estimator.git
+cd battery_estimator
+git submodule update --init --recursive
 cmake .
 make 
 ./Battery_Estimator
 ``` 
 
 ### Unit tests
+I implemented some unit tests for each of the implementations. These use the
+[google test](https://github.com/google/googletest) framework. I added 1 Test file for each implementation,
+these can either be executed indivually or all together by running the RunAllTest binary.
 
 To compile and run the executable, the following commands must be written in the terminal :
 ```
