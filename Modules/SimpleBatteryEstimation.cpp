@@ -32,6 +32,7 @@ double SimpleBatteryEstimation::computeRemainingBattery(double initBattery, cons
                 closestDistance = tmpDist;
             }
         }
+        // computes longitudinal component of closest measurement and adds it to the air speed
         speed = airSpeed + computeHeadWind(closestMeasurementInfo);
 
         // Update the amount of battery left after having flown to the next waypoint

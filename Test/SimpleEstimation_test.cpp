@@ -52,7 +52,3 @@ TEST_F(SimpleEstimation, WindError) {
 ASSERT_THROW(pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData1,
                                                                         energyConsumption), WindError);
 }
-
-
-
-
