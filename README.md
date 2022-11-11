@@ -47,7 +47,7 @@ The following dependencies are required to build and contribute to this reposito
 
 * CMake 3.2 or higher
 * git
-* gcc 5.4 or higher
+* gcc 5.4 or higher (9 or higher for release executable)
 
 ### Building the code
 
