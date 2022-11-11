@@ -13,6 +13,7 @@
 
 #include "AbstractBatteryEstimation.h"
 #include "NaiveBatteryEstimation.h"
+#include "SimpleBatteryEstimation.h"
 
 
 using namespace std;
