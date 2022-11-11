@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
 
     pBatteryEstimation = new NaiveBatteryEstimation;
 
-    double remainingBattery = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData,
+    double batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData,
                                                                           energyConsumption);
-    if (remainingBattery >= batteryMargin){
+    if (batteryEstimation >= batteryMargin){
         cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
         cout<< " Estimated remaining battery at end of mission: "<<batteryEstimation<<endl;
     } else {
