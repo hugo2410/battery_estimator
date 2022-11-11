@@ -31,7 +31,6 @@ int main(int argc, char *argv[]) {
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
     pBatteryEstimation = new SimpleBatteryEstimation;
-    std::vector<double> batteryEstimation;
     try {
         double batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints,
                                                                                 windData,
