@@ -7,8 +7,8 @@
 typedef std::pair<int, int>     Coordinates;
 
 struct WindInfo {
-    float speed;
-    float direction;
+    double speed;
+    double direction;
 };
 
 static constexpr int                    initialBatteryLevel = 20;

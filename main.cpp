@@ -13,6 +13,7 @@
 
 #include "AbstractBatteryEstimation.h"
 #include "NaiveBatteryEstimation.h"
+#include "SimpleBatteryEstimation.h"
 
 
 using namespace std;
@@ -29,15 +30,20 @@ int main(int argc, char *argv[]) {
 
     AbstractBatteryEstimation *pBatteryEstimation{nullptr};
 
-    pBatteryEstimation = new NaiveBatteryEstimation;
-
-    double batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints, windData,
-                                                                          energyConsumption);
-    if (batteryEstimation >= batteryMargin){
-        cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
-        cout<< " Estimated remaining battery at end of mission: "<<batteryEstimation<<" Wh"<<endl;
-    } else {
-        cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
+    pBatteryEstimation = new SimpleBatteryEstimation;
+    try {
+        double batteryEstimation = pBatteryEstimation->computeRemainingBattery(initialBatteryLevel, waypoints,
+                                                                               windData,
+                                                                               energyConsumption);
+        if(batteryEstimation > batteryMargin){
+            cout<< " Flight plan is safe, there is enough battery for the drone to complete the mission"<<endl;
+            cout<< " Estimated remaining battery at end of mission: "<<batteryEstimation<<" Wh"<<endl;
+        } else {
+            cerr<< " Caution: there is not enough battery to complete the flight plan"<<endl;
+        }
+    } catch(AbstractError& e) {
+        cerr << "Exception thrown: " << e.what() << endl;
+        return -1;
     }
     delete pBatteryEstimation;
 

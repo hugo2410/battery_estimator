@@ -2,9 +2,11 @@ project(Modules)
 
 set(HEADER_FILES
         AbstractBatteryEstimation.h
-        NaiveBatteryEstimation.h)
+        AbstractError.h
+        NaiveBatteryEstimation.h
+        SimpleBatteryEstimation.h)
 
 set(SOURCE_FILES
-        Helper.h NaiveBatteryEstimation.cpp)
+        Helper.h NaiveBatteryEstimation.cpp SimpleBatteryEstimation.cpp)
 
 add_library(Modules STATIC ${SOURCE_FILES} ${HEADER_FILES})
